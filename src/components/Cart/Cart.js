@@ -6,7 +6,7 @@ import { useContext } from "react";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
-  const totalAmount = `$${cartCtx.amount.toFixed(2)}`;
+  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItem = cartCtx.items.length > 0;
   const cartItemAddHandler = (item) => {};
   const cartItemRemoveHandler = (id) => {};
