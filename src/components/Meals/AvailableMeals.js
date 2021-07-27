@@ -27,6 +27,7 @@ const DUMMY_MEALS = [
     price: 18.99,
   },
 ];
+
 const mealsList = DUMMY_MEALS.map((meal) => (
   <MealItem
     key={meal.id}
