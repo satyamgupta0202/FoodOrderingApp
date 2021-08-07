@@ -6,7 +6,6 @@ import { useContext, useState } from "react";
 import Checkout from "./checkout";
 const Cart = (props) => {
   const [isCheckout, setIsCheckout] = useState(false);
-
   const cartCtx = useContext(CartContext);
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItem = cartCtx.items.length > 0;
@@ -51,6 +50,17 @@ const Cart = (props) => {
     </div>
   );
 
+  const submitOrderHandler = (userData) => {
+    fetch("https://food-dilevery-cc05d-default-rtdb.firebaseio.com/cart.json", {
+      method: "POST",
+      body: JSON.stringify({
+        user: userData,
+        orderItems: cartCtx.items,
+      }),
+    });
+    cartCtx.clearCart();
+  };
+
   return (
     <Modal onClose={props.onClose}>
       {CartItems}
@@ -59,7 +69,9 @@ const Cart = (props) => {
         <span> {totalAmount}</span>
       </div>
 
-      {isCheckout && <Checkout onCancel={props.onClose} />}
+      {isCheckout && (
+        <Checkout onCancel={props.onClose} onConfirm={submitOrderHandler} />
+      )}
       {!isCheckout && modalActions}
     </Modal>
   );

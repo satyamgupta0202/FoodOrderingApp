@@ -46,6 +46,8 @@ const Checkout = (props) => {
       return;
     }
 
+    props.onConfirm({ name, street, postal, city });
+
     console.log(name, street, postal, city);
   };
 
@@ -55,11 +57,9 @@ const Checkout = (props) => {
   const streetInvalidClass = `${classes.control} ${
     validity.street ? " " : classes.invalid
   }`;
-
   const cityInvalidClass = `${classes.control} ${
     validity.city ? " " : classes.invalid
   }`;
-
   const postalInvalidClass = `${classes.control} ${
     validity.postal ? " " : classes.invalid
   }`;
